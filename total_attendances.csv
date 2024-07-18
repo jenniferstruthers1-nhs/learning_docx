@@ -1,3 +1,3 @@
-month_year,region,total
-June 2024,London,110000
-June 2024,Leeds,5500
+month,year,org_name,total_attendance
+June,2024,London Central Hospital,110000
+June,2024,Leeds General Infirmary,5500

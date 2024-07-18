@@ -13,15 +13,17 @@ def generate_documents_from_csv(csv_file, template_docx, output_folder):
     df = pd.read_csv(csv_file)
     
     # Iterate through each row in the DataFrame
-    # This may need changed dependings on what the csv looks like
+    # This expects a csv where all the info is in each row
     for index, row in df.iterrows():
         # Load the template document
         doc = Document(template_docx)
         
         # Define the mapping of placeholders to replacement text
         placeholder_to_text = {
-            'variableA': row['region'],
-            'variableB': str(row['total']),
+            'ORGNAME': row['org_name'],
+            'MONTH': row['month'],
+            'YEAR': str(row['year']),
+            'TOTAL_ATTENDANCE':str(row['total_attendance'])
         }
 
         # Replace placeholders with text
@@ -30,7 +32,7 @@ def generate_documents_from_csv(csv_file, template_docx, output_folder):
                 replace_placeholder_in_paragraph(para, placeholder, replacement_text)
 
         # Save the modified document
-        output_file = f"{output_folder}/{row['region']}_document.docx"
+        output_file = f"{output_folder}/{row['org_name']}_document.docx"
         doc.save(output_file)
         print(f"Saved: {output_file}")
 
